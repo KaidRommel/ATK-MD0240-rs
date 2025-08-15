@@ -120,6 +120,9 @@ impl Display2in14 {
         }
     }
     fn set_pixel(&mut self, x: u16, y: u16, color: Rgb565) {
+        if x >= COLS || y >= ROWS {
+            return;
+        }
         let idx = self.get_location(x, y);
         let color = color.into_storage();
         self.buffer[idx] = (color >> 8) as u8;
